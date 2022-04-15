@@ -36,7 +36,7 @@ ggplot(temp_sal %>%
                                                title.vjust = 0.2)) +
    scale_y_continuous(name = expression(Temperature~(degree*C)),
                       limits = c(20, 45),
-                      sec.axis = sec_axis(~ ., name = "Salinity (ppt)")) +
+                      sec.axis = sec_axis(~ ., name = expression(Salinity~('‰')))) +
    scale_x_date(name = "Date",
                 breaks = as_date(c("1999-07-01", "1999-12-01", "2000-05-01", "2000-10-01")),
                 limits = as_date(c("1999-07-01", "2000-12-15")),

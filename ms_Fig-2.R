@@ -228,7 +228,7 @@ ggplot(mdat_linear %>%
                      values = c("reference" = ref, "summer" = summ, "winter" = wint),
                      labels = c("reference" = "Reference", "summer" = "Summer-Initiated", "winter" = "Winter-Initiated")) +
    # plot
-   scale_x_continuous(name = expression(Salinity~(ppt)),
+   scale_x_continuous(name = expression(Salinity~('‰')),
                       limits = c(34, 42), 
                       breaks = seq(34, 42, 2)) +
    scale_y_continuous(name = expression(Linear~growth~(mm~d^-1)),
@@ -249,7 +249,7 @@ ggplot(mdat_linear %>%
 windows(height=6, width=8)
 plot_grid(p1, p2, p3, p4, 
           ncol=2, align="hv",
-          labels = "AUTO", label_size=11,
+          labels = "auto", label_size=11,
           label_y = 0.99, label_x = 0.01) %>% 
    # add colorbar legend to p1
    ggdraw() + 
