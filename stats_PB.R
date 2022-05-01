@@ -30,7 +30,7 @@ mdat_pb = comp_growth %>%
 
 
 #--
-# Effects of temperature and salinity on production
+# Effects of temperature and salinity on P:B ratios
 #--
 
 

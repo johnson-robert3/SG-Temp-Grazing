@@ -32,7 +32,7 @@ mdat_lai = sg_structure %>%
 
 
 #--
-# Effects of temperature and salinity on production
+# Effects of temperature and salinity on leaf area index
 #--
 
 
