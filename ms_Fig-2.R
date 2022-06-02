@@ -2,7 +2,7 @@
 # Script to create Figure 2
 #
 # By: R. A. Johnson
-# Email: rajohnson6@wisc.edu
+# Email: robert.a.johnson@wisc.edu
 #~~~
 
 

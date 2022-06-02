@@ -2,7 +2,7 @@
 # Mixed effects models for P:B ratios
 #
 # By: R. A. Johnson
-# Email: rajohnson6@wisc.edu
+# Email: robert.a.johnson@wisc.edu
 #~~~
 
 

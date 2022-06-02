@@ -2,7 +2,7 @@
 # Mixed effects models for linear growth rates
 #
 # By: R. A. Johnson
-# Email: rajohnson6@wisc.edu
+# Email: robert.a.johnson@wisc.edu
 #~~~
 
 
