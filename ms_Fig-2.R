@@ -77,8 +77,7 @@ ggplot(mdat_linear %>%
          axis.text.x = element_text(hjust=0.2),
          axis.title = element_text(size=rel(0.85)), 
          axis.title.x = element_text(margin = margin(t=0.5, unit="line")),
-         axis.title.y = element_text(margin = margin(r=0.5, unit="line")),
-         legend.position="none")
+         axis.title.y = element_text(margin = margin(r=0.5, unit="line")))
 
 # extract the temperature colorbar legend
 t = a +
