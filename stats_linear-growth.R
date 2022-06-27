@@ -47,7 +47,7 @@ f1 = lme(gr_length ~ mean_temp + salinity + treatment + mean_temp:treatment + sa
          random = ~ 1 | plot, data = mdat_linear %>% mutate(treatment = fct_relevel(treatment, "reference")), method="ML")
 
 # is the model significantly better with an AR(1) autocorrelation structure?
-f2 = update(f1, correlation = corAR1(form = ~ time | plot, value = ACF(f1, form = ~ time | plot)[2,2]))
+f2 = update(f1, correlation = corAR1())
 
 anova(f1, f2)  # ns; f1 is better model without autocorrelation
 
@@ -71,7 +71,7 @@ f5 = gls(gr_length ~ mean_temp + salinity + treatment,
 anova(f4, f5)  # sig.; f4 is better model
 
 # AR1
-f6 = update(f4, correlation = corAR1(form = ~ time | plot, value = ACF(f4, form = ~ time | plot)[2,2]))
+f6 = update(f4, correlation = corAR1())
 
 anova(f4, f6)  # ns; f4 is better model
 

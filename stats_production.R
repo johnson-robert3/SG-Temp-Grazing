@@ -47,20 +47,20 @@ f1 = lme(gr_mass ~ mean_temp + salinity + treatment + mean_temp:treatment + sali
          random = ~ 1 | plot, data = mdat_prod %>% mutate(treatment = fct_relevel(treatment, "reference")), method="ML")
 
 # is the model significantly better with an AR(1) autocorrelation structure?
-f2 = update(f1, correlation = corAR1(form = ~ time | plot, value = ACF(f1, form = ~ time | plot)[2,2]))
+f2 = update(f1, correlation = corAR1())
 
 anova(f1, f2)  # yes; f2 is better model with autocorrelation
 
 # is the model significantly better without random effects?
 f3 = gls(gr_mass ~ mean_temp + salinity + treatment + mean_temp:treatment + salinity:treatment, 
          data = mdat_prod %>% mutate(treatment = fct_relevel(treatment, "reference")), method="ML")
-f3 = update(f3, correlation = corAR1(form = ~ time | plot, value = ACF(f3, form = ~ time | plot)[2,2]))
+f3 = update(f3, correlation = corAR1(form = ~ 1 | plot))
 
 anova(f2, f3)  # no; f2 is the better model
 
 # is the model better without interaction terms?
 f4 = update(f1, . ~ . - mean_temp:treatment - salinity:treatment)
-f4 = update(f4, correlation = corAR1(form = ~ time | plot, value = ACF(f4, form = ~ time | plot)[2,2]))
+f4 = update(f4, correlation = corAR1())
 
 anova(f2, f4)  # ns; use simpler model f4
 
@@ -69,7 +69,7 @@ summary(update(f4, method="REML"))
 # without random effects 
 f5 = gls(gr_mass ~ mean_temp + salinity + treatment, 
          data = mdat_prod %>% mutate(treatment = fct_relevel(treatment, "reference")), method="ML")
-f5 = update(f5, correlation = corAR1(form = ~ time | plot, value = ACF(f5, form = ~ time | plot)[2,2]))
+f5 = update(f5, correlation = corAR1(form = ~ 1 | plot))
 
 anova(f4, f5)  # sig.; f4 is better model
 
@@ -79,7 +79,7 @@ anova(f4, f5)  # sig.; f4 is better model
    # is the model significantly different if salinity is removed?
 
 t1 = update(f1, . ~ . - salinity - mean_temp:treatment - salinity:treatment)
-t1 = update(t1, correlation = corAR1(form = ~ time | plot, value = ACF(t1, form = ~ time | plot)[2,2]))
+t1 = update(t1, correlation = corAR1())
 
 anova(f4, t1)  # ns; i.e., model is no better when salinity is included; delta_AIC < 1; simpler model t1 is better
 
@@ -91,7 +91,7 @@ summary(update(t1, method="REML"))
    # is the model significantly different if temperature is removed?
 
 s1 = update(f1, . ~ . - mean_temp - mean_temp:treatment - salinity:treatment)
-s1 = update(s1, correlation = corAR1(form = ~ time | plot, value = ACF(s1, form = ~ time | plot)[2,2]))
+s1 = update(s1, correlation = corAR1())
 
 anova(f4, s1)  # yes, significantly different when temperature is removed; f4 is better model
 
@@ -106,7 +106,7 @@ anova(f4, s1)  # yes, significantly different when temperature is removed; f4 is
 lme.prod = lme(gr_mass ~ mean_temp + treatment, 
                random = ~ 1 | plot, data = mdat_prod %>% mutate(treatment = fct_relevel(treatment, "reference")), method="REML")
 
-lme.prod = update(lme.prod, correlation = corAR1(form = ~ time | plot, value = ACF(lme.prod, form = ~ time | plot)[2,2]))
+lme.prod = update(lme.prod, correlation = corAR1())
 
 
 # model output

@@ -48,26 +48,26 @@ f1 = lme(lai ~ treatment + mean_temp + salinity + mean_temp:treatment + salinity
          random = ~ 1 | plot, data = mdat_lai %>% mutate(treatment = fct_relevel(treatment, "reference")), method="ML")
 
 # is the model significantly better with an AR(1) autocorrelation structure?
-f2 = update(f1, correlation = corAR1(form = ~ time | plot, value = ACF(f1, form = ~ time | plot)[2,2]))
+f2 = update(f1, correlation = corAR1())
 
 anova(f1, f2)  # yes; f2 is better model with autocorrelation
 
 # is the model significantly better without random effects?
 f3 = gls(lai ~ mean_temp + salinity + treatment + mean_temp:treatment + salinity:treatment, 
          data = mdat_lai %>% mutate(treatment = fct_relevel(treatment, "reference")), method="ML")
-f3 = update(f3, correlation = corAR1(form = ~ time | plot, value = ACF(f3, form = ~ time | plot)[2,2]))
+f3 = update(f3, correlation = corAR1(form = ~ 1 | plot))
 
 anova(f2, f3)  # no; f2 is the better model
 
 # is the model better without interaction terms?
 f4 = update(f1, . ~ . - mean_temp:treatment - salinity:treatment)
-f4 = update(f4, correlation = corAR1(form = ~ time | plot, value = ACF(f4, form = ~ time | plot)[2,2]))
+f4 = update(f4, correlation = corAR1())
 
 anova(f2, f4)  # no; f2 is better model
 
 # is the model better with a temp interaction, but no salinity interaction?
 f5 = update(f1, . ~ . - salinity:treatment)
-f5 = update(f5, correlation = corAR1(form = ~ time | plot, value = ACF(f5, form = ~ time | plot)[2,2]))
+f5 = update(f5, correlation = corAR1())
 
 anova(f4, f5)  # yes, f5 is the better model
 anova(f2, f5)  # ns; delta_AIC = 0.2; use simpler model f5 (f5 also has fewer DF)
@@ -80,7 +80,7 @@ summary(update(f5, method="REML"))
    # is the model significantly different if salinity is removed?
 
 t1 = update(f1, . ~ . - salinity - salinity:treatment)
-t1 = update(t1, correlation = corAR1(form = ~ time | plot, value = ACF(t1, form = ~ time | plot)[2,2]))
+t1 = update(t1, correlation = corAR1())
 
 anova(f2, t1)  # sig., delta_AIC = 3.85
 anova(f5, t1)  # sig., delta_AIC = 3.63; f5 is better
@@ -94,14 +94,14 @@ MuMIn::r.squaredGLMM(update(t1, method="REML"))
    # is the model significantly different if temperature is removed?
 
 s1 = update(f1, . ~ . - mean_temp - mean_temp:treatment)
-s1 = update(s1, correlation = corAR1(form = ~ time | plot, value = ACF(s1, form = ~ time | plot)[2,2]))
+s1 = update(s1, correlation = corAR1())
 
 anova(f2, s1)  # yes, significantly different when temperature is removed
 anova(f5, s1)  # yes; f5 is better model
 
 # without interaction
 s2 = update(f1, . ~ . - mean_temp - mean_temp:treatment - salinity:treatment)
-s2 = update(s2, correlation = corAR1(form = ~ time | plot, value = ACF(s2, form = ~ time | plot)[2,2]))
+s2 = update(s2, correlation = corAR1())
 
 anova(s1, s2)  # ns; use simpler model s2 without an interaction
 anova(f5, s2)  # sig.; f5 is better model
@@ -119,7 +119,7 @@ summary(update(s2, method="REML"))  # salinity does not have a significant effec
 lme.lai = lme(lai ~ mean_temp + salinity + treatment + mean_temp:treatment, 
               random = ~ 1 | plot, data = mdat_lai %>% mutate(treatment = fct_relevel(treatment, "reference")), method="REML")
 
-lme.lai = update(lme.lai, correlation = corAR1(form = ~ time | plot, value = ACF(lme.lai, form = ~ time | plot)[2,2]))
+lme.lai = update(lme.lai, correlation = corAR1())
 
 
 # model output
