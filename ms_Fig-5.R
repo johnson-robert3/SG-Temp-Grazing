@@ -133,7 +133,7 @@ ggplot(mdat_lai %>%
                      values = c("reference" = ref, "summer" = summ, "winter" = wint),
                      labels = c("reference" = "Reference", "summer" = "Summer-Initiated", "winter" = "Winter-Initiated")) +
    # plot
-   scale_x_continuous(name = expression(Salinity~('‰')),
+   scale_x_continuous(name = expression(Salinity~(psu)),
                       limits = c(35, 41.5),
                       breaks = seq(35, 41, 2)) +
    scale_y_continuous(name = "Leaf area index", 

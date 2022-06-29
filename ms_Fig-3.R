@@ -214,7 +214,7 @@ ggplot(mdat_prod %>%
                      values = c("reference" = ref, "summer" = summ, "winter" = wint),
                      labels = c("reference" = "Reference", "summer" = "Summer-Initiated", "winter" = "Winter-Initiated")) +
    # plot
-   scale_x_continuous(name = expression(Salinity~('‰')),
+   scale_x_continuous(name = expression(Salinity~(psu)),
                       limits = c(34, 42), 
                       breaks = seq(34, 42, 2)) +
    scale_y_continuous(name = expression(Production~(g~DM~m^-2~d^-1)), 
