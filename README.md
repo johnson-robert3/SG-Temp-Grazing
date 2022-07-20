@@ -1,7 +1,7 @@
 # Seagrass growth dynamics manuscript
 
 
-Title: **Simulated green turtle grazing alters effects of temperature on seagrass growth dynamics across seasons**
+Title: **Simulated green turtle grazing alters effects of environmental drivers on seagrass growth dynamics across seasons**
 
 Authors: Robert A. Johnson, Kathleen M. Hanes, Alan B. Bolten, and Karen A. Bjorndal
 
