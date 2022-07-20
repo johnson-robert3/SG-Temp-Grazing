@@ -30,7 +30,6 @@ wint = "#0f3460"
 ## Panel A
 ## reference and summer-clipped plots over time mapped to temperature
 
-# windows(height=3, width=4)
 a =
 ggplot(mdat_linear %>% 
           # exclude winter-clipped treatment
@@ -105,7 +104,6 @@ p1 = a +
 ## Panel B
 ## summer- vs winter-initiated clipped plots over time
 
-# windows(height=3, width=4)
 p2 =
 ggplot(mdat_linear %>% 
           # select clipped treatment data
@@ -152,7 +150,6 @@ ggplot(mdat_linear %>%
 ## Panel C
 ## Linear growth rates vs temperature
 
-# windows(height=3, width=4)
 p3 =
 ggplot(mdat_linear %>% 
           # calculate mean by treatment
@@ -201,7 +198,6 @@ ggplot(mdat_linear %>%
 ## Panel D
 ## Linear growth rates vs salinity
 
-# windows(height=3, width=4)
 p4 =
 ggplot(mdat_linear %>% 
           # calculate mean by treatment

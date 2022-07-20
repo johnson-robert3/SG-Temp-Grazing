@@ -104,9 +104,10 @@ anova(f4, s1)  # yes, significantly different when temperature is removed; f4 is
 #_Best model for production
 # model t1
 lme.prod = lme(gr_mass ~ mean_temp + treatment, 
-               random = ~ 1 | plot, data = mdat_prod %>% mutate(treatment = fct_relevel(treatment, "reference")), method="REML")
-
-lme.prod = update(lme.prod, correlation = corAR1())
+               random = ~ 1 | plot,
+               correlation = corAR1(), 
+               data = mdat_prod %>% mutate(treatment = fct_relevel(treatment, "reference")), 
+               method="REML")
 
 
 # model output
@@ -115,6 +116,18 @@ broom.mixed::tidy(lme.prod)
 
 # R-squared values: marginal (on fixed effects only) and conditional (on fixed and random effects)
 MuMIn::r.squaredGLMM(lme.prod)
+
+
+#--
+# Table of model AIC comparisons
+#--
+
+aic.prod = anova(f2, f1, f3, f4, t1, s1) %>% 
+   rownames_to_column() %>% 
+   as_tibble() %>%
+   select(rowname, df, AIC) %>%
+   rename(model = rowname)
+
 
 
    ## remove objects

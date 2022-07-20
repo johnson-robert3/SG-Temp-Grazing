@@ -30,7 +30,6 @@ wint = "#0f3460"
 ## Panel A
 ## reference and summer-clipped plots over time mapped to temperature
 
-# windows(height=3, width=4)
 a = 
 ggplot(mdat_prod %>% 
           # exclude winter-clipped treatment
@@ -105,9 +104,7 @@ p1 = a +
 ## Panel B
 ## summer- vs winter-initiated clipped plots over time
 
-# windows(height=3, width=4)
 p2 = 
-# ggplot(gr_mass_trt %>% filter(treatment!="ref", year==2000)) +
 ggplot(mdat_prod %>% 
           # select clipped treatment data
           filter(treatment!="reference", year(date)==2000) %>%
@@ -153,7 +150,6 @@ ggplot(mdat_prod %>%
 ## Panel C
 ## Production vs temperature
 
-# windows(height=3, width=4)
 p3 =
 ggplot(mdat_prod %>% 
           # calculate mean by treatment
@@ -199,7 +195,6 @@ ggplot(mdat_prod %>%
 ## Panel D
 ## Production vs salinity
 
-# windows(height=3, width=4)
 p4 =
 ggplot(mdat_prod %>% 
           # calculate mean by treatment

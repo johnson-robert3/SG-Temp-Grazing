@@ -94,9 +94,10 @@ anova(f2, s1)  # yes, significantly different when temperature is removed; f2 is
 #_Best model for P:B ratio
 # model f2
 lme.pb = lme(PB ~ mean_temp + salinity + treatment + mean_temp:treatment + salinity:treatment, 
-             random = ~ 1 | plot, data = mdat_pb %>% mutate(treatment = fct_relevel(treatment, "reference")), method="REML")
-
-lme.pb = update(lme.pb, correlation = corAR1())
+             random = ~ 1 | plot, 
+             correlation = corAR1(), 
+             data = mdat_pb %>% mutate(treatment = fct_relevel(treatment, "reference")), 
+             method="REML")
 
 
 # model output
@@ -105,6 +106,18 @@ broom.mixed::tidy(lme.pb)
 
 # R-squared values: marginal (on fixed effects only) and conditional (on fixed and random effects)
 MuMIn::r.squaredGLMM(lme.pb)
+
+
+#--
+# Table of model AIC comparisons
+#--
+
+aic.pb = anova(f2, f1, f3, f4, t1, s1) %>% 
+   rownames_to_column() %>% 
+   as_tibble() %>%
+   select(rowname, df, AIC) %>%
+   rename(model = rowname)
+
 
 
    ## remove objects

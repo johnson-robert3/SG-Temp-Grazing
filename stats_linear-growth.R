@@ -102,7 +102,9 @@ anova(f4, s1)  # yes, significantly different when temperature is removed; f4 is
 #_Best model for linear growth
 # model f4
 lme.linear = lme(gr_length ~ mean_temp + salinity + treatment, 
-                 random = ~ 1 | plot, data = mdat_linear %>% mutate(treatment = fct_relevel(treatment, "reference")), method="REML")
+                 random = ~ 1 | plot, 
+                 data = mdat_linear %>% mutate(treatment = fct_relevel(treatment, "reference")), 
+                 method="REML")
 
 
 # model output
@@ -111,6 +113,18 @@ broom.mixed::tidy(lme.linear)
 
 # R-squared values: marginal (on fixed effects only) and conditional (on fixed and random effects)
 MuMIn::r.squaredGLMM(lme.linear)
+
+
+#--
+# Table of model AIC comparisons
+#--
+
+aic.linear = anova(f2, f1, f3, f4, t1, s1) %>% 
+   rownames_to_column() %>% 
+   as_tibble() %>%
+   select(rowname, df, AIC) %>%
+   rename(model = rowname)
+
 
 
    ## remove objects

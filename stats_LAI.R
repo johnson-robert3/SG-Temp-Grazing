@@ -117,9 +117,10 @@ summary(update(s2, method="REML"))  # salinity does not have a significant effec
 #_Best model for LAI
 # model f5
 lme.lai = lme(lai ~ mean_temp + salinity + treatment + mean_temp:treatment, 
-              random = ~ 1 | plot, data = mdat_lai %>% mutate(treatment = fct_relevel(treatment, "reference")), method="REML")
-
-lme.lai = update(lme.lai, correlation = corAR1())
+              random = ~ 1 | plot, 
+              correlation = corAR1(), 
+              data = mdat_lai %>% mutate(treatment = fct_relevel(treatment, "reference")), 
+              method="REML")
 
 
 # model output
@@ -128,6 +129,18 @@ broom.mixed::tidy(lme.lai)
 
 # R-squared values: marginal (on fixed effects only) and conditional (on fixed and random effects)
 MuMIn::r.squaredGLMM(lme.lai)
+
+
+#--
+# Table of model AIC comparisons
+#--
+
+aic.lai = anova(f2, f1, f3, f5, f4, t1, s2) %>% 
+   rownames_to_column() %>% 
+   as_tibble() %>%
+   select(rowname, df, AIC) %>%
+   rename(model = rowname)
+
 
 
    ## remove objects

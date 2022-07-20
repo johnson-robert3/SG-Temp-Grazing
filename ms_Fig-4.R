@@ -30,7 +30,6 @@ wint = "#0f3460"
 ## Panel A
 ## P:B ratio over time, all treatments
 
-# windows(height=3, width=4)
 p1 = 
 ggplot(mdat_pb %>%
           # calculate mean and SE by treatment
@@ -69,7 +68,6 @@ ggplot(mdat_pb %>%
 ## Panel B
 ## P:B ratio vs temperature
 
-# windows(height=3, width=4)
 p2 =
 ggplot(mdat_pb %>%
           # calculate mean by treatment
@@ -120,7 +118,6 @@ ggplot(mdat_pb %>%
 ## Panel C
 ## P:B ratio vs salinity
 
-# windows(height=3, width=4)
 p3 =
 ggplot(mdat_pb %>%
           # calculate mean by treatment

@@ -30,7 +30,6 @@ wint = "#0f3460"
 ## Panel A
 ## LAI over time, all treatments
 
-# windows(height=3, width=4)
 p1 =
 ggplot(mdat_lai %>%
           # calculate mean and SE by treatment
@@ -69,7 +68,6 @@ ggplot(mdat_lai %>%
 ## Panel B
 ## LAI vs temperature
 
-# windows(height=3, width=4)
 p2 =
 ggplot(mdat_lai %>%
           # calculate treatment means
@@ -118,7 +116,6 @@ ggplot(mdat_lai %>%
 ## Panel C
 ## LAI vs salinity
 
-# windows(height=3, width=4)
 p3 =
 ggplot(mdat_lai %>%
           # calculate treatment means
@@ -126,6 +123,17 @@ ggplot(mdat_lai %>%
           summarize(lai = mean(lai, na.rm=TRUE),
                     salinity = mean(salinity, na.rm=TRUE)) %>%
           ungroup()) +
+   # regression lines from LME model
+   geom_line(data = mdat_lai %>%
+                # model-predicted values
+                mutate(pred = predict(update(lme.lai, .~. - mean_temp - mean_temp:treatment))) %>%
+                group_by(treatment, date) %>%
+                summarize(across(c(salinity, pred), ~mean(., na.rm=TRUE))) %>%
+                ungroup(),
+             aes(x = salinity, y = pred, group = treatment, color = treatment), 
+             linetype=1, size=0.5, show.legend=FALSE) +
+   scale_color_manual(breaks = c("reference", "summer", "winter"),
+                      values = c("reference" = ref, "summer" = summ, "winter" = wint)) +
    # data points
    geom_point(aes(x = salinity, y = lai, fill = treatment), shape=21, size=2.5) +
    scale_fill_manual(name = NULL,
