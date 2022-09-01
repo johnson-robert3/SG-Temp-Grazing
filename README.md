@@ -8,6 +8,10 @@ Authors: Robert A. Johnson, Kathleen M. Hanes, Alan B. Bolten, and Karen A. Bjor
 
 ### Repository
 
-This repository contains the data files and R code necessary to recreate the analyses and figures presented in the above-listed manuscript. Data files will be archived in a permanent data repository upon manuscript acceptance. 
+This repository contains the R code necessary to recreate all analyses, tables, and figures presented in the above-listed manuscript.  
 
 Repository maintained by R. A. Johnson (email: robert.a.johnson@wisc.edu).
+
+
+The data used in this manuscript are publicly available and have been archived in the [Environmental Data Initiative](https://doi.org/10.6073/pasta/601ae427b99c240e6df52c0737efbab3) repository. 
+
