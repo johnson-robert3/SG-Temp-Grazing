@@ -1,5 +1,5 @@
 #~~~
-# Load packages, import and process data sets
+# Load packages, process data sets
 # 
 # By: R. A. Johnson
 # Email: robert.a.johnson@wisc.edu
@@ -18,32 +18,46 @@ library(lubridate)
 se = function(.dat, na.rm=TRUE) { sd(.dat) / sqrt(length(.dat)) }
 
 
+### Run the "data_import.R" script first to download and import archived data sets from EDI.
+
 
 #--
-# Read in data sets
+# Process data sets
 #--
+
+# Update data set names and column types 
 
 ## Environmental Data
-temp_sal = read_csv("Data/Temperature-Salinity.csv") %>%
+temp_sal = dt5 %>%
+   mutate(treatment = as.character(treatment)) %>%
+   mutate(across(where(is.integer), ~as.double(.))) %>%
    # calculate mean temperature variable
    #  average between weekly minimum and maximum temperatures
    mutate(mean_temp = (min_temp + max_temp) / 2)
 
 
 #_Seagrass Structure
-sg_structure = read_csv("Data/Seagrass-structure.csv")
+sg_structure = dt4 %>%
+   mutate(treatment = as.character(treatment)) %>%
+   mutate(across(where(is.integer), ~as.double(.)))
 
 
 #_Seagrass Aboveground Biomass
-ag_biomass = read_csv("Data/Seagrass-aboveground-biomass.csv")
+ag_biomass = dt1 %>%
+   mutate(treatment = as.character(treatment)) %>%
+   mutate(across(where(is.integer), ~as.double(.)))
 
 
 #_Seagrass Linear Growth Rates
-length_growth = read_csv("Data/Seagrass-linear-growth-rates.csv")
+length_growth = dt2 %>%
+   mutate(treatment = as.character(treatment)) %>%
+   mutate(across(where(is.integer), ~as.double(.)))
 
 
 #_Seagrass Rates of Production
-mass_growth = read_csv("Data/Seagrass-production-rates.csv")
+mass_growth = dt3 %>%
+   mutate(treatment = as.character(treatment)) %>%
+   mutate(across(where(is.integer), ~as.double(.)))
 
 
 
