@@ -13,5 +13,8 @@ This repository contains the R code necessary to recreate all analyses, tables, 
 Repository maintained by R. A. Johnson (email: robert.a.johnson@wisc.edu).
 
 
-The data supporting the findings of this study are publicly available and have been archived in the [Environmental Data Initiative](https://doi.org/10.6073/pasta/601ae427b99c240e6df52c0737efbab3) repository. 
+### Data
+
+Data supporting the findings of this study are publicly available in the [Environmental Data Initiative](https://doi.org/10.6073/pasta/601ae427b99c240e6df52c0737efbab3) repository.
+
 
