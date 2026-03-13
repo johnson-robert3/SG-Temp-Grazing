@@ -5,6 +5,8 @@ Title: **Simulated green turtle grazing alters effects of environmental drivers 
 
 Authors: Robert A. Johnson, Kathleen M. Hanes, Alan B. Bolten, and Karen A. Bjorndal
 
+Published in *Limnology and Oceanography* (2022). [DOI: 10.1002/lno.12227](https://aslopubs.onlinelibrary.wiley.com/doi/10.1002/lno.12227)
+
 
 ### Data
 
